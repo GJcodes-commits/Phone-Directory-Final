@@ -45,38 +45,33 @@ function addOrUpdateContact() {
   }
 
   const action = editIndex === "" ? "add" : "update";
-  const data = {
-    action,
-    name,
-    phone,
-    designation,
-    key: action === "update" ? parseInt(editIndex) : -1
-  };
 
-  fetch(GOOGLE_SHEETS_WEBAPP_URL, {
-    method: "POST",
-       mode: 'cors',
-    body: JSON.stringify(data),
-    headers: {
-      "Content-Type": "application/json"
-    }
-  })
-    .then(res => res.json())
-    .then(response => {
-      if (response.status === "success") {
-        alert(`Contact ${action === "add" ? "added" : "updated"} successfully!`);
-        clearForm();
-        loadContacts();
-      } else {
-        alert("Failed to save contact.");
-      }
-    })
-    .catch(error => {
-      console.error("Error:", error);
-      alert("Request failed.");
-    });
-}
+const formData = new URLSearchParams();
+formData.append("action", action);
+formData.append("name", name);
+formData.append("phone", phone);
+formData.append("designation", designation);
+formData.append("key", action === "update" ? parseInt(editIndex) : -1);
 
+// ✅ Use formData directly in fetch, no JSON, no headers
+fetch(GOOGLE_SHEETS_WEBAPP_URL, {
+  method: "POST",
+  body: formData
+})
+.then(res => res.json())
+.then(response => {
+  if (response.status === "success") {
+    alert(`Contact ${action === "add" ? "added" : "updated"} successfully!`);
+    clearForm();
+    loadContacts();
+  } else {
+    alert("Failed to save contact.");
+  }
+})
+.catch(error => {
+  console.error("Error:", error);
+  alert("Request failed.");
+});
 // Populate form fields to edit contact
 function editContact(index) {
   const contacts = JSON.parse(localStorage.getItem("contacts")) || [];
@@ -101,10 +96,8 @@ function deleteContact(index) {
   fetch(GOOGLE_SHEETS_WEBAPP_URL, {
     method: "POST",
        mode: 'cors',
-    body: JSON.stringify(data),
-    headers: {
-      "Content-Type": "application/json"
-    }
+    body:formData
+  
   })
     .then(res => res.json())
     .then(response => {
