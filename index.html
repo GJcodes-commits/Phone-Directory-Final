@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Phone Directory (CSMSS)</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .top-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    .top-controls input[type="text"] {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .top-controls button {
+      padding: 10px 16px;
+      background-color: #6200ee;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Phone Directory (CSMSS)</h1>
+
+    <div class="top-controls">
+      <input type="text" id="search" placeholder="Search..." onkeyup="searchContacts()">
+      <button onclick="location.href='admin-login.html'">Admin Login</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Designation</th>
+        </tr>
+      </thead>
+      <tbody id="contact-list"></tbody>
+    </table>
+  </div>
+
+  <script src="user.js"></script>
+</body>
+</html>
