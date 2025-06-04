@@ -72,6 +72,14 @@ fetch(GOOGLE_SHEETS_WEBAPP_URL, {
   console.error("Error:", error);
   alert("Request failed.");
 });
+}
+
+function logout() {
+  isAdmin = false;
+  clearForm();
+  window.location.href = "index.html";
+}
+
 // Populate form fields to edit contact
 function editContact(index) {
   const contacts = JSON.parse(localStorage.getItem("contacts")) || [];
@@ -141,11 +149,7 @@ function searchContacts() {
 }
 
 // Logout and clear form
-function logout() {
-  isAdmin = false;
-  clearForm();
-  window.location.href = "index.html";
-}
+
 
 // Load contacts on page load
 window.onload = function () {
