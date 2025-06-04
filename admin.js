@@ -155,3 +155,8 @@ function searchContacts() {
 window.onload = function () {
   loadContacts();
 };
+
+// 👇 This makes your functions visible globally so your HTML buttons can use them
+window.addOrUpdateContact = addOrUpdateContact;
+window.logout = logout;
+
